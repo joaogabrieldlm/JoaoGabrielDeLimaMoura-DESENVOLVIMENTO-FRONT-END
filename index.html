@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciador de Tarefas Acadêmicas</title>
+</head>
+<body>
+  <header>
+    <h1>Gerenciador de Tarefas Acadêmicas</h1>
+  </header>
+
+  <main>
+    <section aria-labelledby="filtros-titulo">
+      <h2 id="filtros-titulo">Filtros e Busca</h2>
+      
+      <form>
+        <div>
+          <label for="busca-titulo">Buscar por título da tarefa:</label>
+          <input type="search" id="busca-titulo" name="busca">
+        </div>
+
+        <div>
+          <label for="filtro-status">Filtrar por status:</label>
+          <select id="filtro-status" name="status">
+            <option value="todos">Todos os status</option>
+            <option value="a-fazer">A fazer</option>
+            <option value="em-andamento">Em andamento</option>
+            <option value="em-revisao">Em revisão</option>
+            <option value="concluida">Concluída</option>
+          </select>
+        </div>
+
+        <fieldset>
+          <legend>Filtrar por prioridade:</legend>
+          
+          <div>
+            <input type="radio" id="prio-todas" name="prioridade-filtro" value="todas" checked>
+            <label for="prio-todas">Todas</label>
+          </div>
+          <div>
+            <input type="radio" id="prio-baixa" name="prioridade-filtro" value="baixa">
+            <label for="prio-baixa">Baixa</label>
+          </div>
+          <div>
+            <input type="radio" id="prio-media" name="prioridade-filtro" value="media">
+            <label for="prio-media">Média</label>
+          </div>
+          <div>
+            <input type="radio" id="prio-alta" name="prioridade-filtro" value="alta">
+            <label for="prio-alta">Alta</label>
+          </div>
+        </fieldset>
+      </form>
+    </section>
+    <section aria-labelledby="quadro-titulo">
+      <h2 id="quadro-titulo">Quadro de Tarefas</h2>
+      <section aria-labelledby="col-a-fazer">
+        <h3 id="col-a-fazer">A fazer</h3>
+        <ul>
+          <li>
+            <article>
+              <h4>Elaborar Diagrama de Classes</h4>
+              <p><strong>Projeto:</strong> Sistema de Gestão Escolar</p>
+              <p><strong>Responsável:</strong> Ana Silva</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-20">20/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Alta</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h4>Pesquisa Bibliográfica sobre Acessibilidade</h4>
+              <p><strong>Projeto:</strong> Portal Inclusivo</p>
+              <p><strong>Responsável:</strong> Carlos Eduardo</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-25">25/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Média</p>
+            </article>
+          </li>
+        </ul>
+      </section>
+      <section aria-labelledby="col-em-andamento">
+        <h3 id="col-em-andamento">Em andamento</h3>
+        <ul>
+          <li>
+            <article>
+              <h4>Implementar Estrutura Semântica (E1)</h4>
+              <p><strong>Projeto:</strong> Gerenciador Acadêmico</p>
+              <p><strong>Responsável:</strong> Gabriel Souza</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-12">12/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Alta</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h4>Entrevistas com Usuários</h4>
+              <p><strong>Projeto:</strong> Redesenho de UX da Biblioteca</p>
+              <p><strong>Responsável:</strong> Mariana Costa</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-18">18/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Baixa</p>
+            </article>
+          </li>
+        </ul>
+      </section>
+      <section aria-labelledby="col-em-revisao">
+        <h3 id="col-em-revisao">Em revisão</h3>
+        <ul>
+          <li>
+            <article>
+              <h4>Revisão do Artigo de Iniciação Científica</h4>
+              <p><strong>Projeto:</strong> Artigo Compilers &amp; AI</p>
+              <p><strong>Responsável:</strong> Roberto Lima</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-15">15/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Alta</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h4>Validação do Modelo ER no Banco de Dados</h4>
+              <p><strong>Projeto:</strong> Sistema de Gestão Escolar</p>
+              <p><strong>Responsável:</strong> Fernanda Dias</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-14">14/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Média</p>
+            </article>
+          </li>
+        </ul>
+      </section>
+      <section aria-labelledby="col-concluida">
+        <h3 id="col-concluida">Concluída</h3>
+        <ul>
+          <li>
+            <article>
+              <h4>Configuração do Repositório Git e GitHub</h4>
+              <p><strong>Projeto:</strong> Gerenciador Acadêmico</p>
+              <p><strong>Responsável:</strong> Gabriel Souza</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-05">05/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Média</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <h4>Definição dos Requisitos do Projeto</h4>
+              <p><strong>Projeto:</strong> Portal Inclusivo</p>
+              <p><strong>Responsável:</strong> Lucas Martins</p>
+              <p><strong>Prazo:</strong> <time datetime="2026-08-01">01/08/2026</time></p>
+              <p><strong>Prioridade:</strong> Baixa</p>
+            </article>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </main>
+  <footer>
+    <p>Desenvolvido por: <strong>João Gabriel De Lima Moura</strong></p>
+    <p>Disciplina: Desenvolvimento Frontend — 2026.2</p>
+  </footer>
+
+</body>
+</html>
