@@ -1,24 +1,33 @@
 :root {
+  /* Paleta Visão Noturna Clara (High-Brightness Tactical Green) */
+  --color-bg: #22543d;             /* Fundo verde-militar médio */
+  --color-surface: #2f855a;        /* Painel e colunas em verde tático claro */
+  --color-surface-card: #38a169;   /* Cartões em verde-folha brilhante */
   
-  --color-bg: #f8fafc;
-  --color-surface: #ffffff;
-  --color-text: #0f172a;
-  --color-text-muted: #475569;
-  --color-border: #cbd5e1;
-  --color-focus: #2563eb;
+  --color-text: #f0fdf4;            /* Texto e títulos em branco fósforo brilhante */
+  --color-text-muted: #dcfce7;      /* Texto secundário em verde claríssimo */
+  --color-border: #6ee7b7;          /* Bordas em verde-menta luminoso */
+  --color-focus: #a7f3d0;           /* Foco da lente */
 
-  --status-a-fazer: #dc2626;
-  --status-em-andamento: #d97706;
-  --status-revisao: #2563eb;
-  --status-concluido: #16a34a;
+  /* Cores de Status */
+  --status-a-fazer: #f87171;        /* Vermelho suave */
+  --status-em-andamento: #facc15;   /* Amarelo tático */
+  --status-revisao: #38bdf8;        /* Azul vibrante */
+  --status-concluido: #4ade80;      /* Verde fósforo */
 
+  /* Espaçamentos ajustados para menor altura */
+  --space-xs: 0.25rem;
   --space-sm: 0.5rem;   
-  --space-md: 1rem;     
-  --space-lg: 1.5rem;   
+  --space-md: 0.75rem;     
+  --space-lg: 1.25rem;   
 
-
+  /* Raios de Borda */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
+
+  /* Efeito de Iluminação */
+  --glow-soft: 0 0 10px rgba(110, 231, 183, 0.4);
+  --glow-card: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 *,
@@ -31,56 +40,101 @@ body {
   margin: 0;
   padding: var(--space-md);
   background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(circle at center, rgba(110, 231, 183, 0.2) 0%, rgba(34, 84, 61, 0.95) 85%),
+    linear-gradient(rgba(255, 255, 255, 0.05) 50%, rgba(0, 0, 0, 0.05) 50%);
+  background-size: 100% 100%, 100% 4px;
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
+/* Cabeçalho Centralizado */
 h1 {
   font-size: clamp(1.5rem, 1rem + 1.5vw, 2.25rem);
   margin-top: 0;
   margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: var(--space-sm);
+  color: var(--color-text);
+  text-shadow: 0 0 8px rgba(110, 231, 183, 0.4);
+  text-align: center;
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+  box-shadow: var(--glow-soft);
 }
 
-input,
+/* Campos de Entrada Compactos */
+input[type="search"],
 select,
 button {
-  min-height: 2.5rem;
-  font-size: 1rem;
-  padding: var(--space-sm);
+  height: 2.25rem; /* Eixo Y mais curto */
+  font-size: 0.95rem;
+  padding: 0 var(--space-sm);
+  background-color: #1c4532;
+  color: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+  font-family: inherit;
+  width: 100%; /* Preenche todo o eixo X */
 }
 
+input:focus,
+select:focus {
+  border-color: var(--color-focus);
+  box-shadow: var(--glow-soft);
+}
+
+/* FORMULÁRIO: Preenche 100% do Eixo X, Curto no Eixo Y e Conteúdo Centralizado */
 form {
+  width: 100%; /* Ocupa toda a largura da tela/container */
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  align-items: center; /* Centraliza o conteúdo interno */
+  gap: var(--space-xs); /* Eixo Y mais curto */
   background-color: var(--color-surface);
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md); /* Menos padding vertical (eixo Y) */
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   margin-bottom: var(--space-lg);
+  box-shadow: var(--glow-card);
 }
 
 form > div {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  align-items: center; /* Centraliza labels e inputs */
+  text-align: center;
+  gap: 0.15rem;
 }
 
 fieldset {
+  width: 100%;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  padding: var(--space-md);
+  padding: var(--space-xs) var(--space-sm); /* Compacto verticalmente */
   display: flex;
+  justify-content: center; /* Centraliza as opções do radio button */
   flex-wrap: wrap;
   gap: var(--space-md);
+  background-color: rgba(28, 69, 50, 0.4);
+}
+
+legend {
+  color: var(--color-text);
+  padding: 0 var(--space-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 fieldset > div {
@@ -89,10 +143,23 @@ fieldset > div {
   gap: 0.25rem;
 }
 
+/* Região Viva de Acessibilidade / Status */
+#regiao-status {
+  margin-bottom: var(--space-md);
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+}
+
+/* Layout das Colunas */
 main > section[aria-labelledby="quadro-titulo"] {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+}
+
+main > section[aria-labelledby="quadro-titulo"] > h2 {
+  text-align: center;
 }
 
 main > section[aria-labelledby="quadro-titulo"] > section {
@@ -104,8 +171,10 @@ main > section[aria-labelledby="quadro-titulo"] > section {
   border-radius: var(--radius-md);
   padding: var(--space-md);
   min-width: 0;
+  box-shadow: var(--glow-card);
 }
 
+/* Borda por coluna */
 section[aria-labelledby="col-a-fazer"] h3 { border-bottom: 3px solid var(--status-a-fazer); }
 section[aria-labelledby="col-em-andamento"] h3 { border-bottom: 3px solid var(--status-em-andamento); }
 section[aria-labelledby="col-em-revisao"] h3 { border-bottom: 3px solid var(--status-revisao); }
@@ -115,6 +184,9 @@ h3 {
   margin: 0;
   padding-bottom: var(--space-sm);
   font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
 }
 
 ul {
@@ -126,25 +198,34 @@ ul {
   gap: var(--space-md);
 }
 
+/* Cartões */
 article {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  background-color: var(--color-bg);
+  background-color: var(--color-surface-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-md);
   min-width: 0; 
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
+
+article:hover {
+  transform: translateY(-2px);
+  border-color: #ffffff;
+  box-shadow: var(--glow-soft);
+}
+
 article h4 {
   margin: 0 0 var(--space-sm) 0;
   font-size: 1rem;
   flex: 1 1 auto;
-
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #ffffff;
 }
 
 article p {
@@ -153,26 +234,29 @@ article p {
   color: var(--color-text-muted);
 }
 
+article p strong {
+  color: #ffffff;
+}
+
 article p:has(time) {
   margin-top: auto;
   padding-top: var(--space-sm);
-  font-weight: 500;
+  font-weight: 600;
+  border-top: 1px solid var(--color-border);
 }
 
+/* Rodapé */
 footer {
   margin-top: var(--space-lg);
   padding-top: var(--space-md);
   border-top: 1px solid var(--color-border);
   font-size: 0.875rem;
   color: var(--color-text-muted);
+  text-align: center;
 }
 
+/* Responsividade Mantida */
 @media (min-width: 640px) {
-  form {
-    flex-direction: row;
-    align-items: flex-end;
-  }
-
   main > section[aria-labelledby="quadro-titulo"] {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
