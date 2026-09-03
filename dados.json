@@ -1,0 +1,60 @@
+{
+  "tarefas": [
+    {
+      "id": 1,
+      "titulo": "Elaborar Diagrama de Classes",
+      "status": "a-fazer",
+      "prioridade": "alta",
+      "prazo": "2026-08-20"
+    },
+    {
+      "id": 2,
+      "titulo": "Pesquisa Bibliográfica sobre Acessibilidade",
+      "status": "a-fazer",
+      "prioridade": "media",
+      "prazo": "2026-08-25"
+    },
+    {
+      "id": 3,
+      "titulo": "Implementar Estrutura Semântica (E1)",
+      "status": "em-andamento",
+      "prioridade": "alta",
+      "prazo": "2026-08-12"
+    },
+    {
+      "id": 4,
+      "titulo": "Entrevistas com Usuários",
+      "status": "em-andamento",
+      "prioridade": "baixa",
+      "prazo": "2026-08-18"
+    },
+    {
+      "id": 5,
+      "titulo": "Revisão do Artigo de Iniciação Científica",
+      "status": "em-revisao",
+      "prioridade": "alta",
+      "prazo": "2026-08-15"
+    },
+    {
+      "id": 6,
+      "titulo": "Validação do Modelo ER no Banco de Dados",
+      "status": "em-revisao",
+      "prioridade": "media",
+      "prazo": "2026-08-14"
+    },
+    {
+      "id": 7,
+      "titulo": "Configuração do Repositório Git e GitHub",
+      "status": "concluida",
+      "prioridade": "media",
+      "prazo": "2026-08-05"
+    },
+    {
+      "id": 8,
+      "titulo": "Definição dos Requisitos do Projeto",
+      "status": "concluida",
+      "prioridade": "baixa",
+      "prazo": "2026-08-01"
+    }
+  ]
+}
