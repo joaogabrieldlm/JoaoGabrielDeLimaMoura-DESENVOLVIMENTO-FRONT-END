@@ -1,12 +1,13 @@
 export async function carregarTarefas() {
-  const resposta = await fetch('./dados.json');
 
-  if (!resposta.ok) {
-    const erro = new Error(`Erro ao buscar tarefas: ${resposta.status}`);
-    erro.name = 'ProtocolError';
-    throw erro;
-  }
+    const resposta = await fetch("./dados.json");
+  
+    if (!resposta.ok) {
+        const erro = new Error(`Resposta HTTP ${resposta.status}`);
+        erro.status = resposta.status;
+        throw erro;
+    }
 
-  const dados = await resposta.json();
-  return dados.tarefas;
+    const documento = await resposta.json();
+    return documento.tarefas ?? [];
 }
