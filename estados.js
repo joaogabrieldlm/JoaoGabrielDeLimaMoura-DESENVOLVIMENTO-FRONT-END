@@ -1,26 +1,53 @@
-import { renderizarQuadro } from './renderizacao.js';
+import { renderizarTarefas } from "./renderizacao.js";
 
-export function renderizarEstado(estado, dados = null) {
-  const regiaoStatus = document.getElementById('regiao-status');
-  const quadroContainer = document.querySelector('section[aria-labelledby="quadro-titulo"]');
+function pluralizar(quantidade, singular, plural) {
+    return quantidade === 1 ? singular : plural;
+}
 
-  if (estado === 'carregando') {
-    const mensagem = 'Carregando tarefas...';
-    regiaoStatus.textContent = mensagem;
-    quadroContainer.innerHTML = `<p>${mensagem}</p>`;
-  } 
-  else if (estado === 'sucesso') {
-    const total = dados ? dados.length : 0;
-    regiaoStatus.textContent = `Tarefas carregadas com sucesso. Total: ${total} tarefas.`;
-    renderizarQuadro(dados);
-  } 
-  else if (estado === 'vazio') {
-    const mensagem = 'Nenhuma tarefa encontrada.';
-    regiaoStatus.textContent = mensagem;
-    quadroContainer.innerHTML = `<p>${mensagem}</p>`;
-  } 
-  else if (estado === 'erro') {
-    regiaoStatus.textContent = `Erro: ${dados}`;
-    quadroContainer.innerHTML = `<p role="alert">${dados}</p>`;
-  }
+    if (erro && erro.name === "TypeError") {
+        return "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.";
+    }
+
+    if (erro && erro.name === "SyntaxError") {
+        return "Os dados recebidos não puderam ser interpretados (formato inválido).";
+    }
+
+    if (erro && typeof erro.status === "number") {
+        return `O servidor respondeu com um erro (status ${erro.status}).`;
+    }
+
+    return "Não foi possível carregar as tarefas.";
+}
+
+export function renderizarEstado(estado, dados) {
+    const elementoEstado = document.querySelector("[data-estado]");
+    const quadro = document.querySelector("[data-quadro]");
+
+    switch (estado) {
+        case "carregando":
+            if (elementoEstado) elementoEstado.textContent = "Carregando tarefas...";
+            break;
+
+        case "sucesso": {
+            const tarefas = dados ?? [];
+            if (quadro) renderizarTarefas(tarefas, quadro);
+            if (elementoEstado) {
+                elementoEstado.textContent =
+                    `${tarefas.length} ${pluralizar(tarefas.length, "tarefa carregada", "tarefas carregadas")}.`;
+            }
+            break;
+        }
+
+        case "vazio":
+            if (quadro) renderizarTarefas([], quadro);
+            if (elementoEstado) elementoEstado.textContent = "Nenhuma tarefa encontrada.";
+            break;
+
+        case "erro":
+            if (elementoEstado) elementoEstado.textContent = mensagemDeErro(dados);
+            break;
+
+        default:
+            break;
+    }
 }
