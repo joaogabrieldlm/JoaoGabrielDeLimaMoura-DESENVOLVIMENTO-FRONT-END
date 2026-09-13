@@ -1,53 +1,64 @@
+// js/estados.js
+//
+// Responsabilidade única: dado o estado inteiro da aplicação e a lista
+// já derivada (busca + filtros + ordenação aplicados), decidir qual
+// mensagem/tela mostrar e anunciar isso na região viva para quem usa
+// leitor de tela. Nenhuma requisição e nenhuma regra de filtro aqui —
+// isso é papel de api.js e derivacao.js, respectivamente.
+
 import { renderizarTarefas } from "./renderizacao.js";
 
-function pluralizar(quantidade, singular, plural) {
-    return quantidade === 1 ? singular : plural;
+const regiaoStatus = document.getElementById("status-tarefas");
+
+const mensagensErro = {
+  rede: "Não foi possível conectar à rede. Verifique sua conexão e tente novamente.",
+  protocolo: "O servidor não conseguiu entregar as tarefas.",
+  formato: "Os dados recebidos vieram em um formato inválido.",
+  desconhecido: "Ocorreu um erro inesperado ao carregar as tarefas.",
+};
+
+export function renderizarEstado(estado, visiveis) {
+  if (estado.carregamento) {
+    limparColunas();
+    regiaoStatus.textContent = "Carregando tarefas...";
+    return;
+  }
+
+  if (estado.erro) {
+    limparColunas();
+    regiaoStatus.textContent = montarMensagemErro(estado.erro);
+    return;
+  }
+
+  if (estado.tarefas.length === 0) {
+    limparColunas();
+    regiaoStatus.textContent = "Nenhuma tarefa encontrada no momento.";
+    return;
+  }
+
+  renderizarTarefas(visiveis);
+
+  if (visiveis.length === 0) {
+    regiaoStatus.textContent =
+      "Nenhuma tarefa corresponde aos filtros aplicados. Tente ajustar a busca ou os filtros.";
+  } else {
+    regiaoStatus.textContent = `${visiveis.length} de ${estado.tarefas.length} tarefas.`;
+  }
 }
 
-    if (erro && erro.name === "TypeError") {
-        return "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.";
-    }
+function montarMensagemErro(detalhe) {
+  const tipo = detalhe?.tipo ?? "desconhecido";
+  const base = mensagensErro[tipo] ?? mensagensErro.desconhecido;
 
-    if (erro && erro.name === "SyntaxError") {
-        return "Os dados recebidos não puderam ser interpretados (formato inválido).";
-    }
+  if (tipo === "protocolo" && detalhe?.mensagem) {
+    return `${base} (${detalhe.mensagem})`;
+  }
 
-    if (erro && typeof erro.status === "number") {
-        return `O servidor respondeu com um erro (status ${erro.status}).`;
-    }
-
-    return "Não foi possível carregar as tarefas.";
+  return base;
 }
 
-export function renderizarEstado(estado, dados) {
-    const elementoEstado = document.querySelector("[data-estado]");
-    const quadro = document.querySelector("[data-quadro]");
-
-    switch (estado) {
-        case "carregando":
-            if (elementoEstado) elementoEstado.textContent = "Carregando tarefas...";
-            break;
-
-        case "sucesso": {
-            const tarefas = dados ?? [];
-            if (quadro) renderizarTarefas(tarefas, quadro);
-            if (elementoEstado) {
-                elementoEstado.textContent =
-                    `${tarefas.length} ${pluralizar(tarefas.length, "tarefa carregada", "tarefas carregadas")}.`;
-            }
-            break;
-        }
-
-        case "vazio":
-            if (quadro) renderizarTarefas([], quadro);
-            if (elementoEstado) elementoEstado.textContent = "Nenhuma tarefa encontrada.";
-            break;
-
-        case "erro":
-            if (elementoEstado) elementoEstado.textContent = mensagemDeErro(dados);
-            break;
-
-        default:
-            break;
-    }
+function limparColunas() {
+  document.querySelectorAll("#colunas-tarefas ul").forEach((ul) => {
+    ul.textContent = "";
+  });
 }
