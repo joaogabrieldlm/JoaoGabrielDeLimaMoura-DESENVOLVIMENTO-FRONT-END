@@ -1,90 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Tarefas Acadêmicas</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quadro de tarefas de projetos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <header>
-        <h1 class="titulo-principal">Gerenciador de Tarefas Acadêmicas</h1>
+      <h1>Tarefas acadêmicas</h1>
     </header>
 
     <main>
-        <section aria-labelledby="filtros-titulo">
-            <h2 id="filtros-titulo">Busca e Filtros</h2>
-            <form action="#" method="GET">      
-                <p>
-                    <label for="busca-titulo">Buscar por título da tarefa:</label>
-                    <input type="text" id="busca-titulo" name="busca">
-                </p>
+      <section>
+        <h2>Busca e filtros</h2>
 
-                <p>
-                    <label for="filtro-status">Filtrar por Status:</label>
-                    <select id="filtro-status" name="status">
-                        <option value="todos">Todos os status</option>
-                        <option value="a-fazer">A fazer</option>
-                        <option value="em-andamento">Em andamento</option>
-                        <option value="em-revisao">Em revisão</option>
-                        <option value="concluida">Concluída</option>
-                    </select>
-                </p>
+        <form id="form-filtros">
+          <div>
+            <label for="busca-titulo">Buscar por título da tarefa</label>
+            <input type="search" id="busca-titulo" name="busca-titulo" />
+          </div>
 
-                <fieldset>
-                    <legend>Filtrar por Prioridade</legend>
-                    
-                    <input type="radio" id="prioridade-todas" name="prioridade" value="todas" checked>
-                    <label for="prioridade-todas">Todas</label>
-                    
-                    <input type="radio" id="prioridade-baixa" name="prioridade" value="baixa">
-                    <label for="prioridade-baixa">Baixa</label>
-                    
-                    <input type="radio" id="prioridade-media" name="prioridade" value="media">
-                    <label for="prioridade-media">Média</label>
-                    
-                    <input type="radio" id="prioridade-alta" name="prioridade" value="alta">
-                    <label for="prioridade-alta">Alta</label>
-                </fieldset>
+          <fieldset>
+            <legend>Filtrar por status</legend>
 
-                <p>
-                    <button type="submit">Aplicar Filtros</button>
-                </p>
-            </form>
-        </section>
+            <div>
+              <input
+                type="radio"
+                id="filtro-status-todos"
+                name="filtro-status"
+                value="todos"
+                checked
+              />
+              <label for="filtro-status-todos">Todos</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-status-a-fazer"
+                name="filtro-status"
+                value="a-fazer"
+              />
+              <label for="filtro-status-a-fazer">A fazer</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-status-em-andamento"
+                name="filtro-status"
+                value="em-andamento"
+              />
+              <label for="filtro-status-em-andamento">Em andamento</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-status-em-revisao"
+                name="filtro-status"
+                value="em-revisao"
+              />
+              <label for="filtro-status-em-revisao">Em revisão</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-status-concluida"
+                name="filtro-status"
+                value="concluida"
+              />
+              <label for="filtro-status-concluida">Concluída</label>
+            </div>
+          </fieldset>
 
-        <p data-estado role="status" aria-live="polite" class="texto-padrao"></p>
+          <fieldset>
+            <legend>Filtrar por prioridade</legend>
 
-        <section aria-labelledby="quadro-titulo" class="quadro-projetos" data-quadro>
-            <h2 id="quadro-titulo">Quadro de Projetos</h2>
+            <div>
+              <input
+                type="radio"
+                id="filtro-prioridade-todas"
+                name="filtro-prioridade"
+                value="todas"
+                checked
+              />
+              <label for="filtro-prioridade-todas">Todas</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-prioridade-baixa"
+                name="filtro-prioridade"
+                value="baixa"
+              />
+              <label for="filtro-prioridade-baixa">Baixa</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-prioridade-media"
+                name="filtro-prioridade"
+                value="media"
+              />
+              <label for="filtro-prioridade-media">Média</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="filtro-prioridade-alta"
+                name="filtro-prioridade"
+                value="alta"
+              />
+              <label for="filtro-prioridade-alta">Alta</label>
+            </div>
+          </fieldset>
 
-            <section aria-labelledby="status-afazer" class="coluna-status">
-                <h3 id="status-afazer">A fazer</h3>
-                <ul class="lista-tarefas" data-lista-status="a-fazer"></ul>
-            </section>
+          <div id="controles-extra">
+            <div>
+              <label for="ordenar-prazo">Ordenar por prazo</label>
+              <select id="ordenar-prazo" name="ordenar-prazo">
+                <option value="nenhuma">Sem ordenação</option>
+                <option value="prazo-asc">Prazo mais próximo primeiro</option>
+                <option value="prazo-desc">Prazo mais distante primeiro</option>
+              </select>
+            </div>
 
-            <section aria-labelledby="status-andamento" class="coluna-status">
-                <h3 id="status-andamento">Em andamento</h3>
-                <ul class="lista-tarefas" data-lista-status="em-andamento"></ul>
-            </section>
+            <button type="button" id="btn-limpar-filtros">Limpar filtros</button>
+          </div>
+        </form>
+      </section>
 
-            <section aria-labelledby="status-revisao" class="coluna-status">
-                <h3 id="status-revisao">Em revisão</h3>
-                <ul class="lista-tarefas" data-lista-status="em-revisao"></ul>
-            </section>
+      <section>
+        <h2>Quadro de tarefas</h2>
 
-            <section aria-labelledby="status-concluida" class="coluna-status">
-                <h3 id="status-concluida">Concluída</h3>
-                <ul class="lista-tarefas" data-lista-status="concluida"></ul>
-            </section>
-        </section>
+        <p id="status-tarefas" role="status" aria-live="polite"></p>
+
+        <div id="colunas-tarefas">
+          <section id="coluna-a-fazer" aria-labelledby="coluna-a-fazer-heading">
+            <h3 id="coluna-a-fazer-heading">A fazer</h3>
+            <ul></ul>
+          </section>
+
+          <section
+            id="coluna-em-andamento"
+            aria-labelledby="coluna-em-andamento-heading"
+          >
+            <h3 id="coluna-em-andamento-heading">Em andamento</h3>
+            <ul></ul>
+          </section>
+
+          <section
+            id="coluna-em-revisao"
+            aria-labelledby="coluna-em-revisao-heading"
+          >
+            <h3 id="coluna-em-revisao-heading">Em revisão</h3>
+            <ul></ul>
+          </section>
+
+          <section id="coluna-concluida" aria-labelledby="coluna-concluida-heading">
+            <h3 id="coluna-concluida-heading">Concluída</h3>
+            <ul></ul>
+          </section>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <p>Desenvolvido por <strong>João Gabriel</strong> - Desenvolvimento Front-end</p>
+      <p> João Gabriel De Lima Moura - Desenvolvimento Front end — 2026</p>
     </footer>
-
-    <script type="module" src="js/app.js"></script>
-</body>
+    <script type="module" src="js/script.js"></script>
+  </body>
 </html>
